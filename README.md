@@ -60,7 +60,19 @@
 ### [병국](./수%20이어%20쓰기/병국.py)
 
 ```py
+tmp = input()
+i = 0
 
+while True:
+    i += 1
+    num = str(i) # num : 찾는 수
+    while len(num) > 0 and len(tmp) > 0: # tmp와 num이 비어있지않을때만
+        if num[0] == tmp[0]: # 같으면,,
+            tmp = tmp[1:] # 한칸씩 땡긴다,,,,112 > 12 > 2
+        num = num[1:] # tmp 다 땡기고 나면 num 땡기기
+    if tmp == '': # tmp 이제 없으면,,
+        print(i)
+        break
 ```
 
 ### [상미](./수%20이어%20쓰기/상미.py)
@@ -97,6 +109,20 @@
 ### [병국](./문자열%20교환/병국.py)
 
 ```py
+# 98% 오답
+strr = input()
+
+# 문자열은 원형이라 처음과 끝이 이어진다,,,
+# a 개수 세어주자
+
+cnt = strr.count('a')
+
+minn = float('INF')
+strr += strr
+for i in range(len(strr)-cnt-1):
+    minn = min(minn, strr[i:i+cnt].count('b'))
+print(minn)
+
 
 ```
 
