@@ -54,7 +54,30 @@
 ### [민웅](./수%20이어%20쓰기/민웅.py)
 
 ```py
+# 1515_수 이어쓰기_continuing numbers
+import sys
+input = sys.stdin.readline
 
+number = input().rstrip()
+length = len(number)
+
+cnt = 1
+
+while True:
+    if length == 0:
+        break
+
+    check = str(cnt)
+    l = len(check)
+
+    for i in range(l):
+        if length and number.startswith(check[i]):
+            number = number[1:]
+            length -= 1
+
+    cnt += 1
+
+print(cnt-1)
 ```
 
 ### [병국](./수%20이어%20쓰기/병국.py)
@@ -103,7 +126,26 @@ while True:
 ### [민웅](./문자열%20교환/민웅.py)
 
 ```py
+# 1522_문자열교환_string exchange
+import sys
+input = sys.stdin.readline
 
+init_value = input().rstrip()
+
+tail = init_value.count('a')
+left = init_value[:tail]
+
+new_str = init_value+left
+
+start = 0
+ans = float('inf')
+for i in range(len(init_value)):
+    temp = new_str[i:i+tail]
+    check = temp.count('b')
+    if check < ans:
+        ans = check
+
+print(ans)
 ```
 
 ### [병국](./문자열%20교환/병국.py)
@@ -154,7 +196,38 @@ print(minn)
 ### [민웅](./가희와%20탑/민웅.py)
 
 ```py
+# 24337_가희와 탑_Gahee and tower
+import sys
+from collections import deque
+input = sys.stdin.readline
 
+N, a, b = map(int, input().split())
+ans = deque()
+if a >= b:
+    for i in range(1, a+1):
+        ans.append(i)
+    if (N-a) >= b:
+        temp = ans.popleft()
+        for k in range(N-b-a+1):
+            ans.appendleft(1)
+        ans.appendleft(temp)
+    for j in range(b-1, 0, -1):
+        ans.append(j)
+else:
+    for i in range(b, 0, -1):
+        ans.append(i)
+    for j in range(a-1, 0, -1):
+        ans.appendleft(j)
+    if (N-a-b) >= 0:
+        temp = ans.popleft()
+        for k in range(N-b-a+1):
+            ans.appendleft(1)
+        ans.appendleft(temp)
+
+if len(ans) > N:
+    print(-1)
+else:
+    print(*ans)
 ```
 
 ### [병국](./가희와%20탑/병국.py)
