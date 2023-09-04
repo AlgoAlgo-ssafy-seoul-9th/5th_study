@@ -9,9 +9,14 @@ a와 b로만 이루어진 문자열이 주어질 때,  a를 모두 연속으로 
 
 '''
 
-import sys
-input = sys.stdin.readline
+S = input()
+a = S.count('a')
 
-S = input().strip()
+ans = len(S)            # 전체문자열의 길이
+for i in range(a-1, len(S)): # 두 번째 부분 문자열의 시작 위치
+    ans = min(ans, S[i - a + 1:i+1].count('b'))
 
-print(S)
+for i in range(0, a-1):     # 첫 번째 부분 문자열의 끝 위치
+    ans = min(ans, (S[i-a+1:] + S[:i+1]).count('b'))
+
+print(ans)
