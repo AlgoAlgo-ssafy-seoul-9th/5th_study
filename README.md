@@ -107,6 +107,26 @@ while True:
 ### [성구](./수%20이어%20쓰기/성구.py)
 
 ```py
+# 1515 수 이어 쓰기
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+n = deque(list(input().strip()))
+
+index = 0
+
+while n:
+    index += 1
+    nums = deque(list(str(index)))
+    while nums and n:
+        # 처음 자리 수부터 확인
+        if nums[0] == n[0]:
+            # 만약 첫자리가 같다면 다음 자리수 확인을 위한 입력값에서 하나 빼기
+            n.popleft()
+        # 앞자리부터 빼면서 확인
+        nums.popleft()
+print(index)
 
 ```
 
@@ -191,6 +211,38 @@ print(ans)
 ### [성구](./문자열%20교환/성구.py)
 
 ```py
+# 1522 문자열 교환
+import sys
+from collections import deque
+
+input = sys.stdin.readline
+
+s = input().strip()
+cnt = 0
+# 초기 a 갯수 구하기
+for i in s:
+    if i == "a":
+        cnt += 1
+left, right = 0, cnt
+# a를 한 곳으로 모으기 위해서는 갯수만큼 리스트 범위를 정함
+# 정한 범위 내에서 b의 갯수가 바꾸는 수
+# 초기 b의 개수가 minV 초기 값
+b_count = 0
+for b in s[left:right]:
+    if b == "b":
+        b_count += 1
+minV = b_count
+# 윈도우 슬라이싱을 통해 옮기는 횟수의 최소 구하기
+while left < len(s):
+    if s[left] == "b":
+        b_count -= 1
+    #  원형 큐 조심
+    if s[right % len(s)] == "b":
+        b_count += 1
+    left += 1
+    right = (right + 1) % len(s)
+    minV = min(minV, b_count)
+print(minV)
 
 ```
 
