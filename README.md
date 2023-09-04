@@ -171,7 +171,21 @@ print(minn)
 ### [상미](./문자열%20교환/상미.py)
 
 ```py
+ab = input()
+a_cnt = ab.count('a')
+ans = 1001
 
+for i in range(len(ab)):
+    sub = ''
+    if i + a_cnt >= len(ab):
+        check = (i + a_cnt) % len(ab)
+        sub = ab[i:] + ab[:check]
+    else:
+        sub = ab[i : i+a_cnt]
+    b_cnt = sub.count('b')
+    ans = min(ans, b_cnt)
+
+print(ans)
 ```
 
 ### [성구](./문자열%20교환/성구.py)
